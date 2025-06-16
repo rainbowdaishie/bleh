@@ -1,0 +1,214 @@
+body {
+    background: #fae7ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Container for floating hearts */
+#heart-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Each floating heart wrapper */
+.animated-heart {
+    position: absolute;
+    animation: floatUp linear forwards;
+    opacity: 0.8;
+    z-index: 1;
+
+}
+
+/* Inner heart shape */
+.heart-shape {
+    width: 100%;
+    height: 100%;
+    background: #fbc1d5;
+    position: relative;
+    transform: rotate(0deg);
+}
+
+.heart-shape::before,
+.heart-shape::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fbc1d5;
+    border-radius: 50%;
+}
+
+.heart-shape::before {
+    top: -50%;
+    left: 0;
+}
+
+.heart-shape::after {
+    left: -50%;
+    top: 0;
+}
+
+/* Floating animation */
+@keyframes floatUp {
+    0% {
+        bottom: 0;
+        opacity: 1;
+    }
+    100% {
+        bottom: 100%;
+        opacity: 0;
+    }
+}
+
+.envelope-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+
+}
+
+.envelope {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+/* Top triangle */
+.flap.top {
+    top: 0;
+    left: 0;
+    border-width: 150px 200px 0 200px;
+    border-color: #f06292 transparent transparent transparent;
+}
+
+/* Left triangle */
+.flap.left {
+    top: 0;
+    left: 0;
+    border-width: 150px 0 150px 200px;
+    border-color: transparent transparent transparent #f8bbd0;
+}
+
+/* Right triangle */
+.flap.right {
+    top: 0;
+    right: 0;
+    border-width: 150px 200px 150px 0;
+    border-color: transparent #f8bbd0 transparent transparent;
+}
+
+/* Bottom triangle */
+.flap.bottom {
+    bottom: 0;
+    left: 0;
+    border-width: 0 200px 150px 200px;
+    border-color: transparent transparent #f48fb1 transparent;}
+
+.envelope-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.envelope-wrapper:hover {
+    transform: translate(-50%, -55%) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+.letter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: 1rem;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 8px;
+    font-family: sans-serif;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.envelope-wrapper:hover .letter {
+    opacity: 1;
+}
+
+.confetti-container {
+    position: fixed;    /* or absolute */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 0;          /* height zero so confetti fall down from top */
+    pointer-events: none;
+    overflow: visible;
+    z-index: 1000;      /* above other content */
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: red; /* colors will be overridden by JS */
+    opacity: 1;
+    border-radius: 2px;
+    animation: confetti-fall 800ms forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) rotate(var(--r));
+        opacity: 0;
+    }
+}
+
+#cute-message {
+    position: fixed;       /* fix on screen */
+    top: 20px;             /* near top */
+    left: 50%;             /* centered horizontally */
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.9); /* pinkish translucent */
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    border-radius: 8px;
+    opacity: 1;
+    transition: opacity 1s ease;
+    z-index: 10000;
+    pointer-events: none;  /* so it won’t block clicks */
+
+}
+
+#cute-message.hidden {
+    opacity: 0;
+}
+
